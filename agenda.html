@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda | Tournicotti</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .content-page-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('../images/l-unimaginaire03.jpeg');
+            background-size: 150%;
+            background-position: left center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: blur(3px);
+            z-index: -1;
+        }
+
+        .content-overlay {
+            min-height: 100vh;
+            padding: 140px 2rem 20rem;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 80%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+
+        .event-box {
+            width: 100%;
+            padding: 2.5rem 3rem;
+            border-radius: 2px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .event-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .event-box.white {
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+        }
+
+        .event-box.black {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+        }
+
+        .event-box.small {
+            max-width: 600px;
+        }
+
+        .event-box.medium {
+            max-width: 750px;
+        }
+
+        .event-box.large {
+            max-width: 900px;
+        }
+
+        .event-box.left {
+            align-self: flex-start;
+            margin-left: 2rem;
+        }
+
+        .event-box.right {
+            align-self: flex-end;
+            margin-right: 2rem;
+        }
+
+        .event-box.center {
+            align-self: center;
+        }
+
+        .event-thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            flex-shrink: 0;
+        }
+
+        .event-content {
+            flex: 1;
+        }
+
+        .event-box h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.03em;
+        }
+
+        .event-box.white h3 {
+            color: #000;
+        }
+
+        .event-box.black h3 {
+            color: #fff;
+        }
+
+        .event-box .dates {
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .event-box.white .dates {
+            color: #222;
+        }
+
+        .event-box.black .dates {
+            color: #ccc;
+        }
+
+        .event-box .date-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .event-box .date-item strong {
+            font-weight: 400;
+        }
+
+        .logo-connector {
+            align-self: center;
+            margin: -1rem 0;
+            opacity: 1;
+            animation: breathe 8s ease-in-out infinite;
+        }
+
+        .logo-connector:nth-of-type(2) {
+            margin-left: 10rem;
+        }
+
+        .logo-connector:nth-of-type(4) {
+            margin-left: 18rem;
+        }
+
+        .logo-connector:nth-of-type(6) {
+            margin-left: 5rem;
+        }
+
+        .logo-connector:nth-of-type(8) {
+            margin-left: 15rem;
+        }
+
+        .logo-connector:nth-of-type(10) {
+            margin-left: 8rem;
+        }
+
+        .logo-connector:nth-of-type(12) {
+            margin-left: 12rem;
+        }
+
+        .logo-connector:nth-of-type(14) {
+            margin-left: 20rem;
+        }
+
+        .logo-connector:nth-of-type(16) {
+            margin-left: 6rem;
+        }
+
+        .logo-connector:nth-of-type(18) {
+            margin-left: 14rem;
+        }
+
+        .logo-connector:nth-of-type(20) {
+            margin-left: 9rem;
+        }
+
+        .logo-connector img {
+            width: 50px;
+            height: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        @keyframes breathe {
+            0%, 100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.85;
+                transform: scale(1.12);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-page-wrapper {
+                background-size: 250%;
+            }
+            .event-box {
+                padding: 2rem;
+                max-width: 100% !important;
+                align-self: center !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .event-box h3 {
+                font-size: 1.3rem;
+            }
+            .event-thumbnail {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 1rem;
+            }
+            .logo-connector {
+                margin-left: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-page-wrapper"></div>
+
+    <header id="header">
+        <div class="header-content">
+            <h1 class="logo">
+                <img src="../images/logo-blanc.png" alt="Tournicotti Logo">
+                <span>Tournicotti | Natacha Balet</span>
+            </h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index.html">Accueil</a></li>
+                    <li class="has-submenu">
+                        <a href="compagnie.html">Compagnie</a>
+                        <ul class="submenu">
+                                                        <li><a href="../compagnie/artistes.html">Artistes</a></li>
+                            <li><a href="../compagnie/Passations.html">Passations</a></li>
+                            <li><a href="../compagnie/partenaires.html">Partenaires</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="../oeuvres.html">Œuvres</a>
+                        <ul class="submenu">
+                            <li><a href="../oeuvres/lunimaginaire.html">L'Unimaginaire</a></li>
+                            <li><a href="../oeuvres/les-autres.html">Les Autres</a></li>
+                            <li><a href="../oeuvres/a-cran.html">A-Cran</a></li>
+                            <li><a href="../oeuvres/on-tourne-en-rond.html">On tourne en rond</a></li>
+                            <li><a href="../oeuvres/et-puis-danser.html">Et puis, danser</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="agenda.html" class="active">Agenda</a></li>
+                    <li><a href="../contacts.html">Contacts</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-overlay">
+        <div class="content-wrapper">
+            <!-- 2024 Les Autres -->
+            <div class="event-box white large left">
+                <img src="../images/les-autres.jpg" alt="Les Autres" class="event-thumbnail">
+                <div class="event-content">
+                    <h3>2024 • Les Autres</h3>
+                    <div class="dates">
+                        <div class="date-item"><strong>27 fév au 1er mars</strong> – L'Envolée Val Briard</div>
+                        <div class="date-item"><strong>18 au 21 décembre</strong> – Théâtre National de Chaillot</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- 2023 L'Unimaginaire -->
+            <div class="event-box black medium right">
+                <img src="../images/l-unimaginaire.jpg" alt="L'Unimaginaire" class="event-thumbnail">
+                <div class="event-content">
+                    <h3>2023 • L'Unimaginaire</h3>
+                    <div class="dates">
+                        <div class="date-item"><strong>10 mars</strong> – L'Arsenal Val de Reuil</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- 2023 Les Autres -->
+            <div class="event-box white small left">
+                <img src="../images/les-autres.jpg" alt="Les Autres" class="event-thumbnail">
+                <div class="event-content">
+                    <h3>2023 • Les Autres</h3>
+                    <div class="dates">
+                        <div class="date-item"><strong>22 au 24 janvier</strong> – Lieusaint</div>
+                        <div class="date-item"><strong>16 mars</strong> – Lagny-sur-Marne</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- 2022 A-Cran -->
+            <div class="event-box black medium right">
+                <img src="../images/a-cran.jpg" alt="A-Cran" class="event-thumbnail">
+                <div class="event-content">
+                    <h3>2022 • A-Cran</h3>
+                    <div class="dates">
+                        <div class="date-item"><strong>10-11 mai</strong> – MAC Créteil</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- 2022 Les Autres -->
+            <div class="event-box white large center">
+                <img src="../images/les-autres.jpg" alt="Les Autres" class="event-thumbnail">
+                <div class="event-content">
+                    <h3>2022 • Les Autres</h3>
+                    <div class="dates">
+                        <div class="date-item"><strong>16-17 mars</strong> – Théâtre de Lesigny</div>
+                        <div class="date-item"><strong>4-5 avril</strong> – Théâtre d'Abbeville</div>
+                        <div class="date-item"><strong>12 mai</strong> – Maison des arts Epinay</div>
+                        <div class="date-item"><strong>18-19 mai</strong> – Pôle en Scènes Bron</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- 2021 Les Autres -->
+            <div class="event-box black large left">
+                <img src="../images/les-autres.jpg" alt="Les Autres" class="event-thumbnail">
+                <div class="event-content">
+                    <h3>2021 • Les Autres</h3>
+                    <div class="dates">
+                        <div class="date-item"><strong>17-18 mars</strong> – Salle Gérard Philippe Bonneuil</div>
+                        <div class="date-item"><strong>12-13 mars</strong> – Pôle en Scènes Bron</div>
+                        <div class="date-item"><strong>8-9 mars</strong> – Théâtre d'Abbeville</div>
+                        <div class="date-item"><strong>4 mars</strong> – Maison des arts Epinay</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- 2020 Les Autres -->
+            <div class="event-box white medium right">
+                <img src="../images/les-autres.jpg" alt="Les Autres" class="event-thumbnail">
+                <div class="event-content">
+                    <h3>2020 • Les Autres</h3>
+                    <div class="dates">
+                        <div class="date-item"><strong>5 décembre</strong> – L'entre Deux Scène de Lésigny</div>
+                        <div class="date-item"><strong>13 au 18 février</strong> – Théâtre La Bavette (Suisse)</div>
+                        <div class="date-item"><strong>9 février</strong> – Théâtre Crapouille (Suisse)</div>
+                        <div class="date-item"><strong>7 au 11 janvier</strong> – MAC de Créteil</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- 2018 Les Autres -->
+            <div class="event-box black small left">
+                <img src="../images/les-autres.jpg" alt="Les Autres" class="event-thumbnail">
+                <div class="event-content">
+                    <h3>2018 • Les Autres</h3>
+                    <div class="dates">
+                        <div class="date-item"><strong>4 au 6 décembre</strong> – MAC de Créteil</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" style="background-color: rgba(0, 0, 0, 0.95);">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" aria-label="Instagram" target="_blank" rel="noopener">Instagram</a>
+                <a href="#" aria-label="Facebook" target="_blank" rel="noopener">Facebook</a>
+                <a href="#" aria-label="Newsletter">Newsletter</a>
+            </div>
+            <p>&copy; 2025 Tournicotti | Natacha Balet. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer pour l'animation au scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        const eventBoxes = document.querySelectorAll('.event-box');
+
+        eventBoxes.forEach(box => {
+            observer.observe(box);
+        });
+    </script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

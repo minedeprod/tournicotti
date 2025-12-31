@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts | Tournicotti</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .content-page-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('images/et-puis-danser.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: blur(3px);
+            z-index: -1;
+        }
+
+        .content-overlay {
+            min-height: 100vh;
+            padding: 140px 2rem 20rem;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 80%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+
+        .contact-box {
+            width: 100%;
+            padding: 2.5rem 3rem;
+            border-radius: 2px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .contact-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-box.white {
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-box.black {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+        }
+
+        .contact-box.small {
+            max-width: 500px;
+        }
+
+        .contact-box.medium {
+            max-width: 650px;
+        }
+
+        .contact-box.large {
+            max-width: 800px;
+        }
+
+        .contact-box.left {
+            align-self: flex-start;
+            margin-left: 2rem;
+        }
+
+        .contact-box.right {
+            align-self: flex-end;
+            margin-right: 2rem;
+        }
+
+        .contact-box.center {
+            align-self: center;
+        }
+
+        .contact-box h3 {
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.03em;
+        }
+
+        .contact-box.white h3 {
+            color: #000;
+        }
+
+        .contact-box.black h3 {
+            color: #fff;
+        }
+
+        .contact-box p {
+            line-height: 1.9;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-box.white p {
+            color: #222;
+        }
+
+        .contact-box.black p {
+            color: #ccc;
+        }
+
+        .contact-box a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-box.white a {
+            border-bottom-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-box a:hover {
+            border-bottom-color: currentColor;
+        }
+
+        .logo-connector {
+            align-self: center;
+            margin: -1rem 0;
+            opacity: 1;
+            animation: breathe 8s ease-in-out infinite;
+        }
+
+        .logo-connector:nth-of-type(2) {
+            margin-left: 8rem;
+        }
+
+        .logo-connector:nth-of-type(4) {
+            margin-left: 15rem;
+        }
+
+        .logo-connector:nth-of-type(6) {
+            margin-left: 5rem;
+        }
+
+        .logo-connector:nth-of-type(8) {
+            margin-left: 12rem;
+        }
+
+        .logo-connector img {
+            width: 50px;
+            height: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        @keyframes breathe {
+            0%, 100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.85;
+                transform: scale(1.12);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-page-wrapper {
+                background-size: 250%;
+            }
+            .contact-box {
+                padding: 2rem;
+                max-width: 100% !important;
+                align-self: center !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+            .contact-box h3 {
+                font-size: 1.2rem;
+            }
+            .logo-connector {
+                margin-left: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-page-wrapper"></div>
+
+    <header id="header">
+        <div class="header-content">
+            <h1 class="logo">
+                <img src="images/logo-blanc.png" alt="Tournicotti Logo">
+                <span>Tournicotti | Natacha Balet</span>
+            </h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li class="has-submenu">
+                        <a href="compagnie.html">Compagnie</a>
+                        <ul class="submenu">
+                            <li><a href="compagnie/artistes.html">Artistes</a></li>
+                            <li><a href="compagnie/Passations.html">Passations</a></li>
+                            <li><a href="compagnie/partenaires.html">Partenaires</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="oeuvres.html">Œuvres</a>
+                        <ul class="submenu">
+                            <li><a href="oeuvres/lunimaginaire.html">L'Unimaginaire</a></li>
+                            <li><a href="oeuvres/les-autres.html">Les Autres</a></li>
+                            <li><a href="oeuvres/a-cran.html">A-Cran</a></li>
+                            <li><a href="oeuvres/on-tourne-en-rond.html">On tourne en rond</a></li>
+                            <li><a href="oeuvres/et-puis-danser.html">Et puis, danser</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="agenda.html">Agenda</a></li>
+                    <li><a href="contacts.html" class="active">Contacts</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-overlay">
+        <div class="content-wrapper">
+            <!-- Contact principal -->
+            <div class="contact-box white medium left">
+                <h3>Natacha Balet</h3>
+                <p>30, rue Jean-François Millet<br>
+                76230 Bois-Guillaume</p>
+                <p>+33 6 70 67 52 94<br>
+                <a href="mailto:balet.nat@hotmail.fr">balet.nat@hotmail.fr</a></p>
+            </div>
+
+            <div class="logo-connector">
+                <img src="images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- Siège social -->
+            <div class="contact-box black small right">
+                <h3>Siège social</h3>
+                <p>8, rue du Docteur Derocque<br>
+                76000 ROUEN</p>
+            </div>
+
+            <div class="logo-connector">
+                <img src="images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- Président -->
+            <div class="contact-box white medium center">
+                <h3>Président</h3>
+                <p>Victor Vivet<br>
+                +33 6 84 47 38 42<br>
+                <a href="mailto:cietournicotti@gmail.com">cietournicotti@gmail.com</a></p>
+            </div>
+
+            <div class="logo-connector">
+                <img src="images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- Administration / diffusion -->
+            <div class="contact-box black large left">
+                <h3>Administration / diffusion</h3>
+                <p>Marylène Vollet<br>
+                +33 6 84 47 38 42<br>
+                <a href="mailto:cietournicotti@gmail.com">cietournicotti@gmail.com</a></p>
+            </div>
+
+            <div class="logo-connector">
+                <img src="images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- Production / communication -->
+            <div class="contact-box white medium right">
+                <h3>Production / communication</h3>
+                <p>Mathieu Morelle - Mine de prod<br>
+                <a href="https://www.minedeprod.com" target="_blank" rel="noopener">www.minedeprod.com</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" style="background-color: rgba(0, 0, 0, 0.95);">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" aria-label="Instagram" target="_blank" rel="noopener">Instagram</a>
+                <a href="#" aria-label="Facebook" target="_blank" rel="noopener">Facebook</a>
+                <a href="#" aria-label="Newsletter">Newsletter</a>
+            </div>
+            <p>&copy; 2025 Tournicotti | Natacha Balet. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer pour l'animation au scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        const contactBoxes = document.querySelectorAll('.contact-box');
+        contactBoxes.forEach(box => {
+            observer.observe(box);
+        });
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html>

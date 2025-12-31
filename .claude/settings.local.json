@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(for file in compagnie/*.html oeuvres/*.html agenda/*.html)",
+      "Bash(do)",
+      "Bash(perl:*)",
+      "Bash(done)",
+      "Bash(for file in compagnie/*.html oeuvres/*.html agenda.html)",
+      "Bash(if [ -f \"$file\" ])",
+      "Bash([ \"$file\" != \"compagnie/histoire.html\" ])",
+      "Bash(then)",
+      "Bash(echo:*)",
+      "Bash(fi)",
+      "Bash(compagnie/artistes.html )",
+      "Bash(compagnie/partenaires.html )",
+      "Bash(compagnie/passassions.html )",
+      "Bash(oeuvres/lunimaginaire.html )",
+      "Bash(oeuvres/les-autres.html )",
+      "Bash(oeuvres/a-cran.html )",
+      "Bash(oeuvres/on-tourne-en-rond.html )",
+      "Bash(oeuvres/et-puis-danser.html )",
+      "Bash(agenda.html)",
+      "Bash(open http://localhost:8000/index.html)",
+      "Bash(ls:*)"
+    ]
+  }
+}

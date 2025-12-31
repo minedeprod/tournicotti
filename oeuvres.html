@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Œuvres | Tournicotti</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .content-page-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('images/on-tourne-en-rond.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: blur(3px);
+            z-index: -1;
+        }
+
+        .content-overlay {
+            min-height: 100vh;
+            padding: 140px 2rem 5rem;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.2) 80%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .oeuvres-grid {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .oeuvre-card {
+            position: relative;
+            aspect-ratio: 4/3;
+            border-radius: 2px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .oeuvre-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .oeuvre-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+        }
+
+        .oeuvre-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .oeuvre-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .oeuvre-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
+            padding: 2rem 1.5rem 1.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .oeuvre-card:hover .oeuvre-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 70%, transparent 100%);
+            padding-bottom: 2rem;
+        }
+
+        .oeuvre-title {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin: 0;
+            transition: all 0.3s ease;
+        }
+
+        .oeuvre-card:hover .oeuvre-title {
+            font-size: 1.6rem;
+            letter-spacing: 0.08em;
+        }
+
+        @media (max-width: 768px) {
+            .content-page-wrapper {
+                background-size: 250%;
+            }
+
+            .oeuvres-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 1rem;
+            }
+
+            .oeuvre-card {
+                aspect-ratio: 16/9;
+            }
+
+            .oeuvre-title {
+                font-size: 1.3rem;
+            }
+
+            .oeuvre-card:hover .oeuvre-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .oeuvres-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-page-wrapper"></div>
+
+    <header id="header">
+        <div class="header-content">
+            <h1 class="logo">
+                <img src="images/logo-blanc.png" alt="Tournicotti Logo">
+                <span>Tournicotti | Natacha Balet</span>
+            </h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li class="has-submenu">
+                        <a href="compagnie.html">Compagnie</a>
+                        <ul class="submenu">
+                            <li><a href="compagnie/artistes.html">Artistes</a></li>
+                            <li><a href="compagnie/Passations.html">Passations</a></li>
+                            <li><a href="compagnie/partenaires.html">Partenaires</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="oeuvres.html" class="active">Œuvres</a>
+                        <ul class="submenu">
+                            <li><a href="oeuvres/lunimaginaire.html">L'Unimaginaire</a></li>
+                            <li><a href="oeuvres/les-autres.html">Les Autres</a></li>
+                            <li><a href="oeuvres/a-cran.html">A-Cran</a></li>
+                            <li><a href="oeuvres/on-tourne-en-rond.html">On tourne en rond</a></li>
+                            <li><a href="oeuvres/et-puis-danser.html">Et puis, danser</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="agenda.html">Agenda</a></li>
+                    <li><a href="contacts.html">Contacts</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-overlay">
+        <div class="oeuvres-grid">
+            <a href="oeuvres/lunimaginaire.html" class="oeuvre-card">
+                <img src="images/l-unimaginaire.jpg" alt="L'Unimaginaire">
+                <div class="oeuvre-overlay">
+                    <h2 class="oeuvre-title">L'Unimaginaire</h2>
+                </div>
+            </a>
+
+            <a href="oeuvres/les-autres.html" class="oeuvre-card">
+                <img src="images/les-autres.jpg" alt="Les Autres">
+                <div class="oeuvre-overlay">
+                    <h2 class="oeuvre-title">Les Autres</h2>
+                </div>
+            </a>
+
+            <a href="oeuvres/a-cran.html" class="oeuvre-card">
+                <img src="images/a-cran.jpg" alt="A-Cran">
+                <div class="oeuvre-overlay">
+                    <h2 class="oeuvre-title">A-Cran</h2>
+                </div>
+            </a>
+
+            <a href="oeuvres/on-tourne-en-rond.html" class="oeuvre-card">
+                <img src="images/on-tourne-en-rond.jpg" alt="On tourne en rond">
+                <div class="oeuvre-overlay">
+                    <h2 class="oeuvre-title">On tourne en rond</h2>
+                </div>
+            </a>
+
+            <a href="oeuvres/et-puis-danser.html" class="oeuvre-card">
+                <img src="images/et-puis-danser.jpg" alt="Et puis, danser">
+                <div class="oeuvre-overlay">
+                    <h2 class="oeuvre-title">Et puis, danser</h2>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <footer class="site-footer" style="background-color: rgba(0, 0, 0, 0.95);">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" aria-label="Instagram" target="_blank" rel="noopener">Instagram</a>
+                <a href="#" aria-label="Facebook" target="_blank" rel="noopener">Facebook</a>
+                <a href="#" aria-label="Newsletter">Newsletter</a>
+            </div>
+            <p>&copy; 2025 Tournicotti | Natacha Balet. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer pour l'animation au scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        const oeuvreCards = document.querySelectorAll('.oeuvre-card');
+        oeuvreCards.forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(card);
+        });
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html>

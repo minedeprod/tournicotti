@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Et puis, danser | Tournicotti</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .content-page-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('../images/et-puis-danser.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -1;
+        }
+
+        .content-overlay {
+            min-height: 100vh;
+            padding: 140px 2rem 20rem;
+            margin-bottom: 5rem;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 80%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+
+        .content-container {
+            max-width: 900px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 3rem 4rem;
+            border-radius: 2px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            align-self: flex-start;
+            margin-left: 2rem;
+        }
+
+        .content-container:nth-of-type(3) {
+            align-self: flex-end;
+            margin-right: 3rem;
+            margin-left: 0;
+        }
+
+        .content-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-container h2 {
+            font-size: 2.5rem;
+            font-weight: 200;
+            margin-bottom: 1rem;
+            color: #000;
+            letter-spacing: 0.05em;
+        }
+
+        .content-container h3 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #111;
+        }
+
+        .content-container p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #222;
+            font-size: 1rem;
+        }
+
+        .content-container ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            line-height: 1.8;
+            color: #222;
+        }
+
+        .content-container li {
+            margin-bottom: 0.5rem;
+        }
+
+        .content-container em {
+            font-style: italic;
+            color: #555;
+        }
+
+        .logo-connector {
+            align-self: center;
+            margin: -1rem 0;
+            margin-left: 8rem;
+            opacity: 1;
+            animation: breathe 8s ease-in-out infinite;
+        }
+
+        .logo-connector:nth-of-type(2) {
+            align-self: center;
+            margin-left: 16rem;
+            margin-top: -0.5rem;
+            margin-bottom: -1.5rem;
+        }
+
+        .logo-connector:nth-of-type(3) {
+            align-self: center;
+            margin-left: 3rem;
+            margin-top: -1rem;
+            margin-bottom: -1rem;
+        }
+
+        .logo-connector:nth-of-type(4) {
+            align-self: center;
+            margin-left: 19rem;
+            margin-top: -1rem;
+            margin-bottom: -1rem;
+        }
+
+        .logo-connector img {
+            width: 50px;
+            height: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        @keyframes breathe {
+            0%, 100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.85;
+                transform: scale(1.12);
+            }
+        }
+
+        .dark-box {
+            max-width: 600px;
+            width: 100%;
+            padding: 2.5rem;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 2px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .dark-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dark-box h3 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .dark-box ul {
+            margin-bottom: 0;
+            padding-left: 1.5rem;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        .dark-box li {
+            margin-bottom: 0.5rem;
+        }
+
+        .dark-box:first-of-type {
+            align-self: flex-start;
+            margin-left: 3rem;
+        }
+
+        .credits-box {
+            align-self: flex-end;
+            margin-right: 3rem;
+        }
+
+        .credits-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .credits-box .credit-line {
+            margin-bottom: 0.6rem;
+            color: #ccc;
+        }
+
+        .credits-box .credit-role {
+            font-weight: 400;
+            color: #fff;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 2rem;
+                align-self: center !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+            .content-container h2 {
+                font-size: 2rem;
+            }
+            .content-container h3 {
+                font-size: 1.3rem;
+            }
+            .dark-box {
+                padding: 1.5rem;
+                max-width: 100%;
+                margin-left: 0 !important;
+                align-self: center !important;
+            }
+            .credits-box {
+                padding: 1.5rem;
+                max-width: 100%;
+                margin-right: 0 !important;
+                align-self: center !important;
+            }
+            .logo-connector {
+                margin-left: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-page-wrapper"></div>
+
+    <header id="header">
+        <div class="header-content">
+            <h1 class="logo">
+                <img src="../images/logo-blanc.png" alt="Tournicotti Logo">
+                <span>Tournicotti | Natacha Balet</span>
+            </h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index.html">Accueil</a></li>
+                    <li class="has-submenu">
+                        <a href="../compagnie.html">Compagnie</a>
+                        <ul class="submenu">
+                                                        <li><a href="../compagnie/artistes.html">Artistes</a></li>
+                            <li><a href="../compagnie/Passations.html">Passations</a></li>
+                            <li><a href="../compagnie/partenaires.html">Partenaires</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="../oeuvres.html" class="active">Œuvres</a>
+                        <ul class="submenu">
+                            <li><a href="lunimaginaire.html">L'Unimaginaire</a></li>
+                            <li><a href="les-autres.html">Les Autres</a></li>
+                            <li><a href="a-cran.html">A-Cran</a></li>
+                            <li><a href="on-tourne-en-rond.html">On tourne en rond</a></li>
+                            <li><a href="et-puis-danser.html">Et puis, danser</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../agenda.html">Agenda</a></li>
+                    <li><a href="../contacts.html">Contacts</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-overlay">
+        <div class="content-wrapper">
+            <div class="content-container">
+                <h2>Et puis, danser</h2>
+                <h3>Présentation du projet</h3>
+                <p><strong>Et puis, danser</strong> est une création chorégraphique en cours, portée par la compagnie Tournicotti et sa chorégraphe Natacha Balet.</p>
+                <p>Cette création scénique s'inscrit comme une prolongation artistique d'un projet d'accompagnement poétique en fin de vie, développé en collaboration avec l'association Exit, une association suisse engagée pour le droit à mourir dans la dignité. Exit accompagne les personnes en fin de vie dans un cadre légal et respectueux. C'est au cœur de cet espace sensible que Natacha Balet a souhaité s'inscrire, en proposant une présence artistique, poétique, dans un contexte où la danse n'est habituellement jamais convoquée.</p>
+                <p>Ce projet, inédit dans son approche, cherche à prolonger cette expérience unique sur scène. Par le geste, la mémoire du corps et la vibration de l'absence, la pièce interroge le passage, les traces, et offre au public une forme d'hommage dansé aux instants partagés avec ceux qui partent.</p>
+                <p>Entre élan et effacement, <strong>Et puis, danser</strong> propose une traversée sensible, une œuvre de mémoire et de présence, où la danse devient rituelle et lien.</p>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <div class="dark-box">
+                <h3>Calendrier prévisionnel</h3>
+                <ul>
+                    <li><strong>Phase de recherche (1 an)</strong> : documentation, rencontres, immersion auprès de personnes concernées, premières explorations en studio</li>
+                    <li><strong>Auditions</strong> : mars 2026</li>
+                    <li><strong>Création plateau</strong> : 4 - 5 mois</li>
+                    <li><strong>Première représentation</strong> : début 2027</li>
+                </ul>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <div class="content-container">
+                <h3>Note d'intention artistique</h3>
+                <p>La démarche artistique de Natacha Balet s'inscrit dans la filiation de la danse-théâtre, notamment celle de Pina Bausch, dont elle a suivi l'enseignement. Sa recherche chorégraphique repose sur une écoute fine du corps, du geste habité, et de l'émotion comme moteur du mouvement.</p>
+                <p>Avec <strong>Et puis, danser</strong>, elle souhaite interroger la mémoire du corps, les traces laissées par les absents, et donner une forme sensible au passage, à l'effacement, à l'adieu.</p>
+                <p>Son travail se nourrira directement des rencontres à venir dans le cadre du projet mené avec l'association Exit. Les échanges avec les personnes accompagnées, leurs proches, les soignants, infuseront l'écriture chorégraphique, sans jamais chercher l'illustration ou le pathos. Il s'agit d'une danse en résonance, qui capte l'invisible et donne à voir l'essentiel.</p>
+                <p><em>« Je veux que la danse devienne un lien de présence pour celles et ceux qui partent, et une mémoire pour ceux qui restent. »</em><br>— Natacha Balet</p>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <div class="dark-box credits-box">
+                <div class="credit-line"><span class="credit-role">Chorégraphe</span> Natacha Balet</div>
+                <div class="credit-line"><span class="credit-role">Création lumière</span> Sofia Bassim</div>
+                <div class="credit-line"><span class="credit-role">Costumes</span> Gwladys Duthill</div>
+                <div class="credit-line"><span class="credit-role">Création musicale</span> David Hess</div>
+                <div class="credit-line"><span class="credit-role">Vidéo</span> Baptiste Klein</div>
+                <div class="credit-line"><span class="credit-role">Communication</span> Mathieu Morelle</div>
+                <div class="credit-line"><span class="credit-role">Diffusion</span> Marylène Vollet</div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" style="background-color: rgba(0, 0, 0, 0.95);">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">Newsletter</a>
+            </div>
+            <p>&copy; 2025 Tournicotti | Natacha Balet. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer pour l'animation au scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        const containers = document.querySelectorAll('.content-container');
+        const darkBoxes = document.querySelectorAll('.dark-box');
+
+        containers.forEach(container => {
+            observer.observe(container);
+        });
+
+        darkBoxes.forEach(box => {
+            observer.observe(box);
+        });
+    </script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

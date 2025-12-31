@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artistes | Tournicotti</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .content-page-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('../images/on-tourne-en-rond02.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -1;
+        }
+
+        .content-overlay {
+            min-height: 100vh;
+            padding: 140px 2rem 20rem;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 80%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+
+        .artist-box {
+            width: 100%;
+            padding: 3rem 4rem;
+            border-radius: 2px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .artist-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .artist-box.white {
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+        }
+
+        .artist-box.black {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+        }
+
+        .artist-box.small {
+            max-width: 600px;
+        }
+
+        .artist-box.medium {
+            max-width: 750px;
+        }
+
+        .artist-box.large {
+            max-width: 900px;
+        }
+
+        .artist-box.left {
+            align-self: flex-start;
+            margin-left: 2rem;
+        }
+
+        .artist-box.right {
+            align-self: flex-end;
+            margin-right: 2rem;
+        }
+
+        .artist-box.center {
+            align-self: center;
+        }
+
+        .artist-box h3 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .artist-box.white h3 {
+            color: #000;
+        }
+
+        .artist-box.black h3 {
+            color: #fff;
+        }
+
+        .artist-box p {
+            line-height: 1.8;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .artist-box.white p {
+            color: #222;
+        }
+
+        .artist-box.black p {
+            color: #ccc;
+        }
+
+        .artist-content {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .artist-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            flex-shrink: 0;
+        }
+
+        .artist-text {
+            flex: 1;
+        }
+
+        .logo-connector {
+            align-self: center;
+            margin: -1rem 0;
+            opacity: 1;
+            animation: breathe 8s ease-in-out infinite;
+        }
+
+        .logo-connector:nth-of-type(2) {
+            margin-left: 10rem;
+        }
+
+        .logo-connector:nth-of-type(4) {
+            margin-left: 18rem;
+        }
+
+        .logo-connector:nth-of-type(6) {
+            margin-left: 5rem;
+        }
+
+        .logo-connector:nth-of-type(8) {
+            margin-left: 15rem;
+        }
+
+        .logo-connector:nth-of-type(10) {
+            margin-left: 8rem;
+        }
+
+        .logo-connector:nth-of-type(12) {
+            margin-left: 12rem;
+        }
+
+        .logo-connector:nth-of-type(14) {
+            margin-left: 20rem;
+        }
+
+        .logo-connector:nth-of-type(16) {
+            margin-left: 6rem;
+        }
+
+        .logo-connector:nth-of-type(18) {
+            margin-left: 14rem;
+        }
+
+        .logo-connector img {
+            width: 50px;
+            height: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        @keyframes breathe {
+            0%, 100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.85;
+                transform: scale(1.12);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .artist-box {
+                padding: 2rem;
+                max-width: 100% !important;
+                align-self: center !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+            .artist-box h3 {
+                font-size: 1.6rem;
+            }
+            .artist-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .artist-photo {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 1rem;
+            }
+            .logo-connector {
+                margin-left: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-page-wrapper"></div>
+
+    <header id="header">
+        <div class="header-content">
+            <h1 class="logo">
+                <img src="../images/logo-blanc.png" alt="Tournicotti Logo">
+                <span>Tournicotti | Natacha Balet</span>
+            </h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index.html">Accueil</a></li>
+                    <li class="has-submenu">
+                        <a href="../compagnie.html" class="active">Compagnie</a>
+                        <ul class="submenu">
+                            <li><a href="artistes.html">Artistes</a></li>
+                            <li><a href="Passations.html">Passations</a></li>
+                            <li><a href="partenaires.html">Partenaires</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="../oeuvres.html">Œuvres</a>
+                        <ul class="submenu">
+                            <li><a href="../oeuvres/lunimaginaire.html">L'Unimaginaire</a></li>
+                            <li><a href="../oeuvres/les-autres.html">Les Autres</a></li>
+                            <li><a href="../oeuvres/a-cran.html">A-Cran</a></li>
+                            <li><a href="../oeuvres/on-tourne-en-rond.html">On tourne en rond</a></li>
+                            <li><a href="../oeuvres/et-puis-danser.html">Et puis, danser</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../agenda.html">Agenda</a></li>
+                    <li><a href="../contacts.html">Contacts</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-overlay">
+        <div class="content-wrapper">
+            <!-- Natacha Balet -->
+            <div class="artist-box white large left">
+                <div class="artist-content">
+                    <img src="../images/natacha-balet.jpg" alt="Natacha Balet" class="artist-photo">
+                    <div class="artist-text">
+                        <h3>Natacha Balet</h3>
+                        <p>Chorégraphe, danseuse et pédagogue, formée auprès de Pina Bausch, José Montalvo, Dominique Hervieux et Dorothée Franc. Elle rejoint le travail de Merlin Nyakam en 2019 en tant qu'interprète. Depuis 2018, sa compagnie Tournicotti se produit en France et en Suisse. Elle est également assistante au Centre Chorégraphique National du Havre auprès de Fouad Boussouf.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- Baptiste Klein -->
+            <div class="artist-box black medium right">
+                <div class="artist-content">
+                    <img src="../images/baptiste-klein.jpg" alt="Baptiste Klein" class="artist-photo">
+                    <div class="artist-text">
+                        <h3>Baptiste Klein</h3>
+                        <p>Artiste plasticien avec des études à l'Université Paris VII et une formation complémentaire à Montréal. Il a contribué à "Namasya" de Shantala Shivalingappa et a collaboré avec José Montalvo dans la danse. Créateur de travaux vidéo dont "Nouveau Roman" (2011) pour Christophe Honoré. A travaillé sur des productions d'opéra à la Bastille et à Lille. Co-fondateur de Tournicotti avec Natacha Balet.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- Sylvain Jouanne -->
+            <div class="artist-box white small left">
+                <div class="artist-content">
+                    <img src="../images/sylvain-jouanne.jpg" alt="Sylvain Jouanne" class="artist-photo">
+                    <div class="artist-text">
+                        <h3>Sylvain Jouanne</h3>
+                        <p>Technicien vidéo avec une expérience en audiovisuel pour des diffuseurs et organisations majeures. A suivi une formation en équipement vidéo de spectacle (CFPTS) et intégré les équipes techniques du MAC Créteil, de la Ferme du Buisson et du Centquatre-Paris. A collaboré sur des productions dont les travaux de David Bobée et Stéphane Ricordel.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- Sofia Bassim -->
+            <div class="artist-box black large right">
+                <div class="artist-content">
+                    <img src="../images/sofia-bassim.jpg" alt="Sofia Bassim" class="artist-photo">
+                    <div class="artist-text">
+                        <h3>Sofia Bassim</h3>
+                        <p>Technicienne lumière et régisseuse pour la Ferme du Buisson et le Théâtre Monfort. A travaillé comme directrice lumière sur des productions en tournée en France et à l'international. A créé les lumières pour les spectacles de Tournicotti "Les Autres," "A-Cran," et "L'Unimaginaire."</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- Carlos Landaeta -->
+            <div class="artist-box white medium left">
+                <div class="artist-content">
+                    <img src="../images/carlos-landaeta.jpg" alt="Carlos Landaeta" class="artist-photo">
+                    <div class="artist-text">
+                        <h3>Carlos Landaeta</h3>
+                        <p>Formé au Venezuela et poursuivi sa formation à l'École de cirque de Chambéry. A travaillé avec Teatro Nueva Era sur des projets théâtre-cirque et participé à "ADHD" de la compagnie tchèque Cirk La Putyka. A rejoint Tournicotti pour "Les autres."</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- Fabien Milet -->
+            <div class="artist-box black small right">
+                <div class="artist-content">
+                    <img src="../images/fabien-milet.jpg" alt="Fabien Milet" class="artist-photo">
+                    <div class="artist-text">
+                        <h3>Fabien Milet</h3>
+                        <p>Acrobate spécialisé dans le travail au mât chinois (simple, double et pendulaire). Formé à Arc en Cirque et au Centre régional des Arts du cirque de Lomme. Également compétent en jonglage et manipulation d'objets. S'est produit avec plusieurs compagnies dont Meli Melo, Malabar, GOP Variétés et Transe Express.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- Margaux Dorsaz -->
+            <div class="artist-box white large center">
+                <div class="artist-content">
+                    <img src="../images/margaux-dorsaz.jpg" alt="Margaux Dorsaz" class="artist-photo">
+                    <div class="artist-text">
+                        <h3>Margaux Dorsaz</h3>
+                        <p>Danseuse formée au Conservatoire Cantonal du Valais et à l'École de danse contemporaine de Montréal. A collaboré avec des chorégraphes dont Helder Seabra, Marie Chouinard et Fouad Boussouf. Danse pour Tournicotti et d'autres compagnies européennes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- Manon Basille -->
+            <div class="artist-box black medium left">
+                <div class="artist-content">
+                    <img src="../images/manon-basille.jpg" alt="Manon Basille" class="artist-photo">
+                    <div class="artist-text">
+                        <h3>Manon Basille</h3>
+                        <p>Interprète, compositrice et performeuse. Violoncelliste, chanteuse et comédienne. Co-fondatrice du groupe "Huit Nuits." Compose pour des productions théâtrales et a publié un recueil de poésie.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- Justine Tourillon -->
+            <div class="artist-box white large right">
+                <div class="artist-content">
+                    <img src="../images/justine-tourillon.jpg" alt="Justine Tourillon" class="artist-photo">
+                    <div class="artist-text">
+                        <h3>Justine Tourillon</h3>
+                        <p>Danseuse, chorégraphe et pédagogue, formée à l'Académie Internationale de Danse (Paris) et au Ballet Junior de Genève. Elle collabore avec la Cie Olivier Dubois, la Cie Tiziana Arnaboldi, Fouad Boussouf (FÊU), la Cie KeatBeck, la Cie du Rouhault (SUCCESSION) et la Cie Via Verde (Le Grand Inconnu). Fondatrice de la Cie du Tourillon (2019) et diplômée d'État (2021), elle rejoint en 2025 la Cie Ex. Corps (Ex Machina) et la Cie Comme tes pieds (Loto portrait), tout en se formant à la réflexologie plantaire.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" style="background-color: rgba(0, 0, 0, 0.95);">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" aria-label="Instagram" target="_blank" rel="noopener">Instagram</a>
+                <a href="#" aria-label="Facebook" target="_blank" rel="noopener">Facebook</a>
+                <a href="#" aria-label="Newsletter">Newsletter</a>
+            </div>
+            <p>&copy; 2025 Tournicotti | Natacha Balet. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer pour l'animation au scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        const artistBoxes = document.querySelectorAll('.artist-box');
+
+        artistBoxes.forEach(box => {
+            observer.observe(box);
+        });
+    </script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
