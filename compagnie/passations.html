@@ -5,9 +5,137 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Passations | Tournicotti</title>
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .content-page-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('../images/montage-les-autres.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .content-overlay {
+            min-height: 100vh;
+            padding: 140px 2rem 20rem;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 80%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+
+        .passations-box {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 3rem 4rem;
+            border-radius: 2px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            align-self: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .passations-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .passations-box h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: #000;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .passations-box p {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #333;
+            margin-bottom: 2rem;
+            text-align: justify;
+        }
+
+        .video-container {
+            background-color: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 2px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 100%;
+            align-self: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out 0.2s, transform 0.6s ease-out 0.2s;
+        }
+
+        .video-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .passations-box {
+                padding: 2rem;
+                max-width: 100% !important;
+                align-self: center !important;
+            }
+
+            .passations-box h2 {
+                font-size: 1.8rem;
+            }
+
+            .passations-box p {
+                font-size: 1rem;
+            }
+
+            .video-container {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header id="header" class="scrolled">
+    <div class="content-page-wrapper"></div>
+
+    <header id="header">
         <div class="header-content">
             <a href="../index.html" class="logo">
                 <img src="../images/logo-blanc.png" alt="Tournicotti Logo">
@@ -15,11 +143,11 @@
             </a>
             <nav class="main-nav">
                 <ul>
-                                        <li class="has-submenu">
+                    <li class="has-submenu">
                         <a href="../compagnie.html" class="active">Compagnie</a>
                         <ul class="submenu">
                             <li><a href="artistes.html">Artistes</a></li>
-                            <li><a href="Passations.html">Passations</a></li>
+                            <li><a href="passations.html">Passations</a></li>
                             <li><a href="partenaires.html">Partenaires</a></li>
                         </ul>
                     </li>
@@ -40,30 +168,54 @@
         </div>
     </header>
 
-    <main class="main-content" style="margin-top: 120px;">
-        <section class="intro">
-            <h2>Passations</h2>
-            <p>Les Passations de la compagnie Tournicotti</p>
-        </section>
+    <main class="content-overlay">
+        <div class="content-wrapper">
+            <div class="passations-box">
+                <h2>Passations</h2>
+                <p>La compagnie Tournicotti initie de nombreux projets en lien avec des publics variés (enfants malades, détenus, danseurs professionnels, personnes en situation de handicap), ancrant sa démarche dans une danse ouverte, adaptée et profondément humaine.</p>
+            </div>
 
-        <section style="max-width: 800px; margin: 3rem auto; line-height: 1.8;">
-            <p style="margin-bottom: 1.5rem;">
-                Ajoutez ici le contenu sur les Passations de la compagnie.
-            </p>
-        </section>
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/nxkWcq7LUDk"
+                            title="Passations - Tournicotti"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer class="site-footer">
         <div class="footer-content">
             <div class="social-links">
-                <a href="#" aria-label="Instagram" target="_blank" rel="noopener">Instagram</a>
-                <a href="#" aria-label="Facebook" target="_blank" rel="noopener">Facebook</a>
+                <a href="https://www.instagram.com/cietournicotti" aria-label="Instagram" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://www.facebook.com/CieTournicotti" aria-label="Facebook" target="_blank" rel="noopener">Facebook</a>
                 <a href="#" aria-label="Newsletter">Newsletter</a>
             </div>
             <p>&copy; 2025 Tournicotti | Natacha Balet. Tous droits réservés.</p>
         </div>
     </footer>
 
+    <script>
+        // Intersection Observer pour l'animation au scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        const passationsBox = document.querySelector('.passations-box');
+        const videoContainer = document.querySelector('.video-container');
+
+        if (passationsBox) observer.observe(passationsBox);
+        if (videoContainer) observer.observe(videoContainer);
+    </script>
     <script src="../js/main.js"></script>
 </body>
 </html>
