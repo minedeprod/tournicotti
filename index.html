@@ -103,5 +103,44 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+        // Effet d'opacité basé sur la proximité de la souris
+        const heroSlider = document.querySelector('.hero-slider');
+        const slideTitles = document.querySelectorAll('.slide-title h2');
+
+        heroSlider.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+
+            slideTitles.forEach(title => {
+                // Seulement pour la slide active
+                if (title.closest('.slide.active')) {
+                    const rect = title.getBoundingClientRect();
+                    const titleCenterX = rect.left + rect.width / 2;
+                    const titleCenterY = rect.top + rect.height / 2;
+
+                    // Calcul de la distance entre la souris et le centre de l'encadré
+                    const distance = Math.sqrt(
+                        Math.pow(clientX - titleCenterX, 2) +
+                        Math.pow(clientY - titleCenterY, 2)
+                    );
+
+                    // Zone d'influence : 300px (ajustable)
+                    const maxDistance = 300;
+
+                    // Calcul de l'opacité : 0.5 (loin) à 1 (proche)
+                    let opacity = 1 - (distance / maxDistance) * 0.5;
+                    opacity = Math.max(0.5, Math.min(1, opacity));
+
+                    title.style.opacity = opacity;
+                }
+            });
+        });
+
+        heroSlider.addEventListener('mouseleave', () => {
+            slideTitles.forEach(title => {
+                title.style.opacity = '0.5';
+            });
+        });
+    </script>
 </body>
 </html>
