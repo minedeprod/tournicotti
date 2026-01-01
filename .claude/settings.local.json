@@ -23,7 +23,8 @@
       "Bash(oeuvres/et-puis-danser.html )",
       "Bash(agenda.html)",
       "Bash(open http://localhost:8000/index.html)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(for:*)"
     ]
   }
 }

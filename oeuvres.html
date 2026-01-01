@@ -16,9 +16,11 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed;
             filter: blur(3px);
             z-index: -1;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         .content-overlay {
@@ -138,14 +140,13 @@
 
     <header id="header">
         <div class="header-content">
-            <h1 class="logo">
+            <a href="../index.html" class="logo">
                 <img src="images/logo-blanc.png" alt="Tournicotti Logo">
                 <span>Tournicotti | Natacha Balet</span>
-            </h1>
+            </a>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li class="has-submenu">
+                                        <li class="has-submenu">
                         <a href="compagnie.html">Compagnie</a>
                         <ul class="submenu">
                             <li><a href="compagnie/artistes.html">Artistes</a></li>

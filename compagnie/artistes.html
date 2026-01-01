@@ -15,8 +15,10 @@
             background-image: url('../images/on-tourne-en-rond02.jpg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
             z-index: -1;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         .content-overlay {
@@ -229,14 +231,13 @@
 
     <header id="header">
         <div class="header-content">
-            <h1 class="logo">
+            <a href="../index.html" class="logo">
                 <img src="../images/logo-blanc.png" alt="Tournicotti Logo">
                 <span>Tournicotti | Natacha Balet</span>
-            </h1>
+            </a>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="../index.html">Accueil</a></li>
-                    <li class="has-submenu">
+                                        <li class="has-submenu">
                         <a href="../compagnie.html" class="active">Compagnie</a>
                         <ul class="submenu">
                             <li><a href="artistes.html">Artistes</a></li>
