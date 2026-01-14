@@ -112,15 +112,16 @@
         }
 
         .associated-box {
-            background-color: rgba(255, 255, 255, 0.85);
+            background-color: rgba(0, 0, 0, 0.92);
             backdrop-filter: blur(10px);
             padding: 2rem;
             border-radius: 2px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
             max-width: 500px;
             width: 100%;
             align-self: flex-end;
             margin-right: 4rem;
+            margin-top: -3rem;
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -129,6 +130,12 @@
         .associated-box.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        .associated-box.left {
+            align-self: flex-start;
+            margin-left: 4rem;
+            margin-right: 0;
         }
 
         .gallery-carousel {
@@ -210,6 +217,95 @@
             }
         }
 
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 10001;
+        }
+
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 10001;
+            width: 50px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-prev::before,
+        .lightbox-next::before {
+            content: '';
+            width: 30px;
+            height: 30px;
+            border-top: 2px solid rgba(255, 255, 255, 0.7);
+            border-right: 2px solid rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-prev::before {
+            transform: rotate(-135deg);
+        }
+
+        .lightbox-next::before {
+            transform: rotate(45deg);
+        }
+
+        .lightbox-prev:hover::before,
+        .lightbox-next:hover::before {
+            border-color: white;
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
         .video-container {
             background-color: rgba(0, 0, 0, 0.92);
             backdrop-filter: blur(10px);
@@ -218,6 +314,7 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             max-width: 900px;
             width: 100%;
+            margin-top: -3rem;
             align-self: center;
             opacity: 0;
             transform: translateY(30px);
@@ -351,20 +448,16 @@
                 <p>Natacha Balet mène un projet de création et de transmission en collaboration avec l'Orchestre de Normandie, le <b>lycée Elisa Lemonnier</b> ainsi que le soutien de la <b>DRAC</b>. Ce projet interdisciplinaire, mêlant musique, danse et apprentissage professionnel, avec de jeunes adultes novices, donne lieu à une présentation publique à l'Espace Marc Sangnier à Mont-Saint-Aignan.</p>
             </div>
 
-            <div class="logo-connector small">
-                <img src="../images/logo-blanc.png" alt="">
-            </div>
-
             <!-- Galerie Lycée -->
             <div class="associated-box">
                 <div class="gallery-carousel">
                     <img src="../images/lycee_el_01.jpeg" alt="Lycée Elisa Lemonnier" class="gallery-main-image" data-gallery="lycee">
                 </div>
                 <div class="gallery-thumbnails">
-                    <img src="../images/lycee_el_01.jpeg" alt="Lycée" class="active" data-index="0" data-gallery="lycee">
                     <img src="../images/lycee_el_02.jpeg" alt="Lycée" data-index="1" data-gallery="lycee">
                     <img src="../images/lycee_el_03.jpeg" alt="Lycée" data-index="2" data-gallery="lycee">
                     <img src="../images/lycee_el_04.jpeg" alt="Lycée" data-index="3" data-gallery="lycee">
+                    <img src="../images/lycee_el_01.jpeg" alt="Lycée" class="active" data-index="0" data-gallery="lycee">
                 </div>
             </div>
 
@@ -388,10 +481,6 @@
                 <p>Natacha Balet développe un projet en partenariat avec le <b>Théâtre national de Chaillot</b>. Dans ce cadre, elle mène tout au long de l'année des ateliers en <b>écoles maternelles</b>, en résonance avec la thématique de son spectacle <b>Les Autres</b>, plaçant l'enfance, l'altérité et le regard porté sur l'autre au cœur de la démarche.</p>
             </div>
 
-            <div class="logo-connector small">
-                <img src="../images/logo-blanc.png" alt="">
-            </div>
-
             <!-- Vidéo Chaillot -->
             <div class="video-container" style="max-width: 600px; align-self: flex-end; margin-right: 4rem;">
                 <div class="video-wrapper">
@@ -413,12 +502,8 @@
                 <p>La compagnie <b>Tournicotti</b> rejoint l'équipe d'<b>Édouard Baer</b> en Suisse pour plusieurs représentations du <b>Journal d'Édouard Baer</b>, s'inscrivant dans une dynamique de collaboration artistique exigeante et plurielle.</p>
             </div>
 
-            <div class="logo-connector small">
-                <img src="../images/logo-blanc.png" alt="">
-            </div>
-
             <!-- Galerie Édouard Baer -->
-            <div class="associated-box" style="align-self: flex-start; margin-left: 4rem; margin-right: 0;">
+            <div class="associated-box left">
                 <div class="gallery-carousel">
                     <img src="../images/edouard_baer_01.jpeg" alt="Édouard Baer" class="gallery-main-image" data-gallery="baer">
                 </div>
@@ -450,6 +535,16 @@
             <p>&copy; 2026 Tournicotti | Natacha Balet. Tous droits réservés.</p>
         </div>
     </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightbox-close">&times;</button>
+        <button class="lightbox-prev" id="lightbox-prev"></button>
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-image" id="lightbox-image">
+        </div>
+        <button class="lightbox-next" id="lightbox-next"></button>
+    </div>
 
     <script>
         // Intersection Observer pour l'animation au scroll
@@ -486,6 +581,90 @@
                 allThumbs.forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
             });
+        });
+
+        // Lightbox functionality
+        let currentGallery = '';
+        let currentIndex = 0;
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
+
+        // Gallery images arrays
+        const galleries = {
+            lycee: [
+                '../images/lycee_el_01.jpeg',
+                '../images/lycee_el_02.jpeg',
+                '../images/lycee_el_03.jpeg',
+                '../images/lycee_el_04.jpeg'
+            ],
+            baer: [
+                '../images/edouard_baer_01.jpeg',
+                '../images/edouard_baer_02.jpeg'
+            ]
+        };
+
+        // Open lightbox when clicking main image
+        document.querySelectorAll('.gallery-main-image').forEach(img => {
+            img.addEventListener('click', function() {
+                currentGallery = this.dataset.gallery;
+                const activeThumbs = document.querySelectorAll(`.gallery-thumbnails img[data-gallery="${currentGallery}"]`);
+                const activeThumb = Array.from(activeThumbs).find(thumb => thumb.classList.contains('active'));
+                currentIndex = activeThumb ? parseInt(activeThumb.dataset.index) : 0;
+
+                openLightbox();
+            });
+        });
+
+        function openLightbox() {
+            lightboxImage.src = galleries[currentGallery][currentIndex];
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function changeLightboxImage(direction) {
+            currentIndex += direction;
+            const galleryLength = galleries[currentGallery].length;
+
+            if (currentIndex < 0) {
+                currentIndex = galleryLength - 1;
+            } else if (currentIndex >= galleryLength) {
+                currentIndex = 0;
+            }
+
+            lightboxImage.src = galleries[currentGallery][currentIndex];
+        }
+
+        // Event listeners for lightbox controls
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxPrev.addEventListener('click', () => changeLightboxImage(-1));
+        lightboxNext.addEventListener('click', () => changeLightboxImage(1));
+
+        // Close lightbox on background click
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    changeLightboxImage(-1);
+                } else if (e.key === 'ArrowRight') {
+                    changeLightboxImage(1);
+                }
+            }
         });
     </script>
     <script src="../js/main.js"></script>
