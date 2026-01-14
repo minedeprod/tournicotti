@@ -228,24 +228,24 @@
 
         .quote-box blockquote {
             font-style: italic;
-            font-size: 1.35rem;
-            line-height: 2;
+            font-size: 1.05rem;
+            line-height: 1.9;
             color: #333;
             margin: 0;
             text-align: left;
             position: relative;
-            padding-left: 2rem;
-            border-left: 3px solid rgba(0, 0, 0, 0.15);
+            padding-left: 3rem;
         }
 
         .quote-box blockquote::before {
             content: '"';
             position: absolute;
-            left: -0.3rem;
-            top: -0.5rem;
-            font-size: 4rem;
-            color: rgba(0, 0, 0, 0.1);
+            left: 0;
+            top: -1.5rem;
+            font-size: 8rem;
+            color: rgba(0, 0, 0, 0.05);
             font-family: Georgia, serif;
+            font-weight: 100;
             line-height: 1;
         }
 
@@ -260,6 +260,29 @@
         .quote-box .quote-author strong {
             color: #000;
             font-weight: 500;
+        }
+
+        .logo-connector {
+            align-self: center;
+            animation: breathe 4s ease-in-out infinite;
+            margin: 2rem 0;
+        }
+
+        .logo-connector img {
+            width: 50px;
+            height: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        @keyframes breathe {
+            0%, 100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.85;
+                transform: scale(1.12);
+            }
         }
 
         /* Lightbox */
@@ -391,12 +414,19 @@
                 max-width: 100%;
             }
             .quote-box blockquote {
-                font-size: 1.1rem;
+                font-size: 0.95rem;
                 line-height: 1.8;
-                padding-left: 1.5rem;
+                padding-left: 2rem;
             }
             .quote-box blockquote::before {
-                font-size: 3rem;
+                font-size: 5rem;
+                top: -1rem;
+            }
+            .logo-connector {
+                margin: 1rem 0;
+            }
+            .logo-connector img {
+                width: 40px;
             }
             .gallery-main-image {
                 height: 300px;
@@ -486,6 +516,10 @@
                     <img src="../images/l-unimaginaire05.jpeg" alt="L'Unimaginaire" data-index="3">
                 </div>
                 <div style="margin-top: 1rem; font-size: 0.8rem; color: #333; text-align: center;">Photos : Patrick Berger</div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
             </div>
 
             <div class="quote-box">
