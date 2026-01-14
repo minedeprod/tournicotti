@@ -294,21 +294,19 @@
             errorDiv.style.display = 'none';
             successDiv.style.display = 'none';
 
-            // Construire l'URL avec les paramètres
-            const url = form.action.replace('/post-json?', '/post-json?') +
-                        '&EMAIL=' + encodeURIComponent(email) +
-                        (fname ? '&FNAME=' + encodeURIComponent(fname) : '') +
-                        (lname ? '&LNAME=' + encodeURIComponent(lname) : '');
+            // Créer un callback unique
+            const callbackName = 'mcCallback_' + Date.now();
 
-            // Créer un script pour JSONP (contourne le CORS)
-            const script = document.createElement('script');
-            const callbackName = 'callback_' + Date.now();
-
-            // Définir la fonction de callback
+            // Définir la fonction de callback globale
             window[callbackName] = function(data) {
                 // Nettoyer
-                delete window[callbackName];
-                document.body.removeChild(script);
+                try {
+                    delete window[callbackName];
+                    const script = document.getElementById('mc-script');
+                    if (script) {
+                        document.body.removeChild(script);
+                    }
+                } catch(e) {}
 
                 // Réactiver le bouton
                 submitButton.disabled = false;
@@ -325,7 +323,7 @@
                 } else {
                     // Erreur
                     let message = data.msg || 'Une erreur est survenue. Veuillez réessayer.';
-                    // Nettoyer le message d'erreur de Mailchimp (enlever les numéros et codes)
+                    // Nettoyer le message d'erreur de Mailchimp
                     message = message.replace(/\d+ - /, '').replace(/<a[^>]*>.*?<\/a>/g, '');
 
                     errorDiv.innerHTML = message;
@@ -334,8 +332,33 @@
                 }
             };
 
-            // Ajouter le callback dans l'URL
-            script.src = url.replace('c=?', 'c=' + callbackName);
+            // Construire l'URL avec le callback
+            const baseUrl = 'https://kleindoeil.us14.list-manage.com/subscribe/post-json';
+            const params = new URLSearchParams({
+                u: 'a113bc22178aafc6073ff3b8e',
+                id: 'acd593aa63',
+                EMAIL: email,
+                c: callbackName
+            });
+
+            if (fname) params.append('FNAME', fname);
+            if (lname) params.append('LNAME', lname);
+
+            // Créer et ajouter le script
+            const script = document.createElement('script');
+            script.id = 'mc-script';
+            script.src = baseUrl + '?' + params.toString();
+
+            // Timeout de sécurité
+            setTimeout(function() {
+                if (submitButton.disabled) {
+                    submitButton.disabled = false;
+                    submitButton.value = "S'inscrire";
+                    errorDiv.textContent = 'Délai d\'attente dépassé. Veuillez réessayer.';
+                    errorDiv.style.display = 'block';
+                }
+            }, 10000);
+
             document.body.appendChild(script);
         });
     </script>
