@@ -48,10 +48,36 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             max-width: 800px;
             width: 100%;
-            align-self: center;
+            align-self: flex-start;
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .passations-box.large {
+            max-width: 900px;
+        }
+
+        .passations-box.medium {
+            max-width: 700px;
+        }
+
+        .passations-box.small {
+            max-width: 600px;
+        }
+
+        .passations-box.left {
+            align-self: flex-start;
+            margin-left: 2rem;
+        }
+
+        .passations-box.right {
+            align-self: flex-end;
+            margin-right: 2rem;
+        }
+
+        .passations-box.center {
+            align-self: center;
         }
 
         .passations-box.visible {
@@ -85,6 +111,74 @@
             letter-spacing: 0.1em;
         }
 
+        .associated-box {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 2px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            align-self: flex-end;
+            margin-right: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .associated-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .gallery-main-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-main-image:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-thumbnails img {
+            width: 100%;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 2px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .gallery-thumbnails img:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        .gallery-thumbnails img.active {
+            opacity: 1;
+            border-color: #000;
+        }
+
         .logo-connector {
             align-self: center;
             animation: breathe 4s ease-in-out infinite;
@@ -95,6 +189,14 @@
             width: 50px;
             height: auto;
             filter: brightness(0) invert(1);
+        }
+
+        .logo-connector.small {
+            margin: 1rem 0;
+        }
+
+        .logo-connector.small img {
+            width: 35px;
         }
 
         @keyframes breathe {
@@ -148,6 +250,8 @@
                 padding: 2rem;
                 max-width: 100% !important;
                 align-self: center !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
             }
 
             .passations-box h2 {
@@ -162,12 +266,32 @@
                 font-size: 4rem;
             }
 
+            .associated-box {
+                max-width: 100% !important;
+                align-self: center !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                padding: 1.5rem;
+            }
+
+            .gallery-main-image {
+                height: 250px;
+            }
+
+            .gallery-thumbnails {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             .logo-connector img {
                 width: 40px;
             }
 
             .video-container {
                 padding: 1rem;
+                max-width: 100% !important;
+                align-self: center !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
             }
         }
     </style>
@@ -210,7 +334,8 @@
 
     <main class="content-overlay">
         <div class="content-wrapper">
-            <div class="passations-box">
+            <!-- Bloc intro -->
+            <div class="passations-box large center">
                 <h2>Passations</h2>
                 <p>Natacha Balet développe des projets artistiques et pédagogiques qui visent à créer des liens, des ponts et des espaces de rencontre entre ses différents métiers, mais surtout entre les êtres humains. Sa démarche s'inscrit dans une volonté constante de transmission, d'ouverture et de dialogue entre les disciplines, les territoires et les publics.</p>
                 <p>À travers <b>Tournicotti</b>, Natacha Balet conçoit et transmet des ateliers au sein de structures très diverses, affirmant une pratique artistique engagée et accessible. Elle intervient aussi bien dans des <b>conservatoires</b>, notamment en Valais, en Suisse, que dans des <b>hôpitaux</b> et des <b>maisons d'arrêt</b>, adaptant chaque fois son approche aux contextes humains et sociaux rencontrés.</p>
@@ -220,16 +345,35 @@
                 <img src="../images/logo-blanc.png" alt="">
             </div>
 
-            <div class="passations-box">
+            <!-- 2024 Lycée -->
+            <div class="passations-box medium left">
                 <div class="year">2024</div>
                 <p>Natacha Balet mène un projet de création et de transmission en collaboration avec l'Orchestre de Normandie, le <b>lycée Elisa Lemonnier</b> ainsi que le soutien de la <b>DRAC</b>. Ce projet interdisciplinaire, mêlant musique, danse et apprentissage professionnel, avec de jeunes adultes novices, donne lieu à une présentation publique à l'Espace Marc Sangnier à Mont-Saint-Aignan.</p>
+            </div>
+
+            <div class="logo-connector small">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- Galerie Lycée -->
+            <div class="associated-box">
+                <div class="gallery-carousel">
+                    <img src="../images/lycee_el_01.jpeg" alt="Lycée Elisa Lemonnier" class="gallery-main-image" data-gallery="lycee">
+                </div>
+                <div class="gallery-thumbnails">
+                    <img src="../images/lycee_el_01.jpeg" alt="Lycée" class="active" data-index="0" data-gallery="lycee">
+                    <img src="../images/lycee_el_02.jpeg" alt="Lycée" data-index="1" data-gallery="lycee">
+                    <img src="../images/lycee_el_03.jpeg" alt="Lycée" data-index="2" data-gallery="lycee">
+                    <img src="../images/lycee_el_04.jpeg" alt="Lycée" data-index="3" data-gallery="lycee">
+                </div>
             </div>
 
             <div class="logo-connector">
                 <img src="../images/logo-blanc.png" alt="">
             </div>
 
-            <div class="passations-box">
+            <!-- 2024 Point Zéro -->
+            <div class="passations-box medium right">
                 <div class="year">2024</div>
                 <p>Natacha rejoint la compagnie <b>Point Zéro</b>, dirigée par <b>Delphine Caron</b>, pour porter un projet mené en partenariat avec <b>Les Papillons Blancs</b>. Cette expérience met en lumière la puissance de la danse comme outil de relation et de révélation, à travers des rencontres ponctuelles avec des adultes autistes sévèrement atteints. Un film naît de ce travail, témoignant de la sensibilité et de la profondeur de ces échanges.</p>
             </div>
@@ -238,34 +382,18 @@
                 <img src="../images/logo-blanc.png" alt="">
             </div>
 
-            <div class="passations-box">
+            <!-- 2025 Chaillot -->
+            <div class="passations-box medium left">
                 <div class="year">2025</div>
                 <p>Natacha Balet développe un projet en partenariat avec le <b>Théâtre national de Chaillot</b>. Dans ce cadre, elle mène tout au long de l'année des ateliers en <b>écoles maternelles</b>, en résonance avec la thématique de son spectacle <b>Les Autres</b>, plaçant l'enfance, l'altérité et le regard porté sur l'autre au cœur de la démarche.</p>
             </div>
 
-            <div class="logo-connector">
+            <div class="logo-connector small">
                 <img src="../images/logo-blanc.png" alt="">
             </div>
 
-            <div class="passations-box">
-                <div class="year">2023</div>
-                <p>La compagnie <b>Tournicotti</b> rejoint l'équipe d'<b>Édouard Baer</b> en Suisse pour plusieurs représentations du <b>Journal d'Édouard Baer</b>, s'inscrivant dans une dynamique de collaboration artistique exigeante et plurielle.</p>
-            </div>
-
-            <div class="logo-connector">
-                <img src="../images/logo-blanc.png" alt="">
-            </div>
-
-            <div class="passations-box">
-                <div class="year">2024</div>
-                <p>La compagnie participe également aux <b>Danses des JO</b>, à l'invitation de <b>Mourad Merzouki</b>, prenant part à cet événement d'envergure où la danse devient un langage fédérateur et populaire.</p>
-            </div>
-
-            <div class="logo-connector">
-                <img src="../images/logo-blanc.png" alt="">
-            </div>
-
-            <div class="video-container">
+            <!-- Vidéo Chaillot -->
+            <div class="video-container" style="max-width: 600px; align-self: flex-end; margin-right: 4rem;">
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/nxkWcq7LUDk"
                             title="Passations - Tournicotti"
@@ -273,6 +401,41 @@
                             allowfullscreen>
                     </iframe>
                 </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- 2023 Édouard Baer -->
+            <div class="passations-box small right">
+                <div class="year">2023</div>
+                <p>La compagnie <b>Tournicotti</b> rejoint l'équipe d'<b>Édouard Baer</b> en Suisse pour plusieurs représentations du <b>Journal d'Édouard Baer</b>, s'inscrivant dans une dynamique de collaboration artistique exigeante et plurielle.</p>
+            </div>
+
+            <div class="logo-connector small">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- Galerie Édouard Baer -->
+            <div class="associated-box" style="align-self: flex-start; margin-left: 4rem; margin-right: 0;">
+                <div class="gallery-carousel">
+                    <img src="../images/edouard_baer_01.jpeg" alt="Édouard Baer" class="gallery-main-image" data-gallery="baer">
+                </div>
+                <div class="gallery-thumbnails">
+                    <img src="../images/edouard_baer_01.jpeg" alt="Édouard Baer" class="active" data-index="0" data-gallery="baer">
+                    <img src="../images/edouard_baer_02.jpeg" alt="Édouard Baer" data-index="1" data-gallery="baer">
+                </div>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
+            <!-- 2024 JO -->
+            <div class="passations-box small center">
+                <div class="year">2024</div>
+                <p>La compagnie participe également aux <b>Danses des JO</b>, à l'invitation de <b>Mourad Merzouki</b>, prenant part à cet événement d'envergure où la danse devient un langage fédérateur et populaire.</p>
             </div>
         </div>
     </main>
@@ -301,10 +464,29 @@
         });
 
         const passationsBoxes = document.querySelectorAll('.passations-box');
+        const associatedBoxes = document.querySelectorAll('.associated-box');
         const videoContainer = document.querySelector('.video-container');
 
         passationsBoxes.forEach(box => observer.observe(box));
+        associatedBoxes.forEach(box => observer.observe(box));
         if (videoContainer) observer.observe(videoContainer);
+
+        // Galeries interactives
+        document.querySelectorAll('.gallery-thumbnails img').forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                const gallery = this.dataset.gallery;
+                const index = this.dataset.index;
+                const mainImage = document.querySelector(`.gallery-main-image[data-gallery="${gallery}"]`);
+                const allThumbs = document.querySelectorAll(`.gallery-thumbnails img[data-gallery="${gallery}"]`);
+
+                // Update main image
+                mainImage.src = this.src;
+
+                // Update active state
+                allThumbs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
     </script>
     <script src="../js/main.js"></script>
 </body>
