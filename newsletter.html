@@ -216,7 +216,7 @@
             <p>Inscrivez-vous pour recevoir nos actualités et suivre les créations de la compagnie Tournicotti.</p>
 
             <div id="mc_embed_signup">
-                <form action="https://kleindoeil.us14.list-manage.com/subscribe/post?u=a113bc22178aafc6073ff3b8e&amp;id=acd593aa63" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                <form action="https://kleindoeil.us14.list-manage.com/subscribe/post-json?u=a113bc22178aafc6073ff3b8e&amp;id=acd593aa63&amp;c=?" method="get" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" novalidate>
                     <div id="mc_embed_signup_scroll">
                         <div class="indicates-required"><span class="asterisk">*</span> obligatoire</div>
 
@@ -265,6 +265,80 @@
         </div>
     </footer>
 
+    <script>
+        // Gestion de l'inscription newsletter via AJAX
+        document.getElementById('mc-embedded-subscribe-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const form = this;
+            const email = document.getElementById('mce-EMAIL').value;
+            const fname = document.getElementById('mce-FNAME').value;
+            const lname = document.getElementById('mce-LNAME').value;
+            const submitButton = document.getElementById('mc-embedded-subscribe');
+            const errorDiv = document.getElementById('mce-error-response');
+            const successDiv = document.getElementById('mce-success-response');
+
+            // Validation basique
+            if (!email) {
+                errorDiv.textContent = 'Veuillez entrer une adresse email.';
+                errorDiv.style.display = 'block';
+                successDiv.style.display = 'none';
+                return;
+            }
+
+            // Désactiver le bouton pendant l'envoi
+            submitButton.disabled = true;
+            submitButton.value = 'Envoi en cours...';
+
+            // Cacher les messages précédents
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+
+            // Construire l'URL avec les paramètres
+            const url = form.action.replace('/post-json?', '/post-json?') +
+                        '&EMAIL=' + encodeURIComponent(email) +
+                        (fname ? '&FNAME=' + encodeURIComponent(fname) : '') +
+                        (lname ? '&LNAME=' + encodeURIComponent(lname) : '');
+
+            // Créer un script pour JSONP (contourne le CORS)
+            const script = document.createElement('script');
+            const callbackName = 'callback_' + Date.now();
+
+            // Définir la fonction de callback
+            window[callbackName] = function(data) {
+                // Nettoyer
+                delete window[callbackName];
+                document.body.removeChild(script);
+
+                // Réactiver le bouton
+                submitButton.disabled = false;
+                submitButton.value = "S'inscrire";
+
+                if (data.result === 'success') {
+                    // Succès
+                    successDiv.textContent = 'Merci pour votre inscription ! Vous allez recevoir un email de confirmation.';
+                    successDiv.style.display = 'block';
+                    errorDiv.style.display = 'none';
+
+                    // Vider le formulaire
+                    form.reset();
+                } else {
+                    // Erreur
+                    let message = data.msg || 'Une erreur est survenue. Veuillez réessayer.';
+                    // Nettoyer le message d'erreur de Mailchimp (enlever les numéros et codes)
+                    message = message.replace(/\d+ - /, '').replace(/<a[^>]*>.*?<\/a>/g, '');
+
+                    errorDiv.innerHTML = message;
+                    errorDiv.style.display = 'block';
+                    successDiv.style.display = 'none';
+                }
+            };
+
+            // Ajouter le callback dans l'URL
+            script.src = url.replace('c=?', 'c=' + callbackName);
+            document.body.appendChild(script);
+        });
+    </script>
     <script src="js/main.js"></script>
 </body>
 </html>
