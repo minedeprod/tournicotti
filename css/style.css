@@ -587,3 +587,18 @@ img {
         font-size: 0.9rem;
     }
 }
+
+.spectacle-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.spectacle-link:hover h3 {
+    letter-spacing: 0.12em;
+}
+
+.spectacle-link:hover p {
+    color: rgba(255, 255, 255, 0.9);
+}
