@@ -623,3 +623,37 @@ img {
 .spectacle-link:hover p {
     color: rgba(255, 255, 255, 0.9);
 }
+
+.download-box {
+    position: relative;
+    overflow: hidden;
+}
+
+.download-box::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background-image: url('../images/logo-blanc.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.03;
+    filter: brightness(0) invert(1);
+    animation: breatheLogo 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes breatheLogo {
+    0%, 100% {
+        opacity: 0.03;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.06;
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+}
