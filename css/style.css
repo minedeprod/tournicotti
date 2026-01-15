@@ -528,6 +528,7 @@ img {
 }
 
 .download-box h3 {
+    color: #fff;
     font-size: 2rem;
     font-weight: 300;
     margin-bottom: 0.5rem;
@@ -603,15 +604,22 @@ img {
     color: rgba(255, 255, 255, 0.9);
 }
 
-.download-box h3 {
-    color: #fff;
-}
 
-.download-box p {
-    color: rgba(255, 255, 255, 0.7);
+.spectacle-link {
+    display: block;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
 .spectacle-link h3,
 .spectacle-link p {
-    color: inherit;
+    color: #fff;
+}
+
+.spectacle-link:hover h3 {
+    letter-spacing: 0.12em;
+}
+
+.spectacle-link:hover p {
+    color: rgba(255, 255, 255, 0.9);
 }
