@@ -602,3 +602,16 @@ img {
 .spectacle-link:hover p {
     color: rgba(255, 255, 255, 0.9);
 }
+
+.download-box h3 {
+    color: #fff;
+}
+
+.download-box p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.spectacle-link h3,
+.spectacle-link p {
+    color: inherit;
+}
