@@ -505,3 +505,85 @@ img {
         font-size: 0.75rem;
     }
 }
+
+
+/* ===================================
+   DOWNLOAD SECTION (HOMEPAGE)
+   =================================== */
+.download-section {
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.download-box {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 3rem 4rem;
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: breatheBox 4s ease-in-out infinite;
+}
+
+.download-box h3 {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+}
+
+.download-box p {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.05em;
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #000;
+    text-decoration: none;
+    border-radius: 2px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.download-btn:hover {
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+@keyframes breatheBox {
+    0%, 100% {
+        box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 6px 24px rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.15);
+    }
+}
+
+@media (max-width: 768px) {
+    .download-box {
+        padding: 2rem;
+    }
+    
+    .download-box h3 {
+        font-size: 1.5rem;
+    }
+    
+    .download-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}

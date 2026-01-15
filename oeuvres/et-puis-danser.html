@@ -153,6 +153,54 @@
             }
         }
 
+        .download-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #000;
+            text-decoration: none;
+            border-radius: 2px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            animation: breatheBtn 3s ease-in-out infinite;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .download-btn.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .download-btn:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+            animation: none;
+        }
+
+        @keyframes breatheBtn {
+            0%, 100% {
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+                border-color: rgba(0, 0, 0, 0.1);
+            }
+            50% {
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+                border-color: rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        .download-container {
+            align-self: center;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
         .dark-box {
             max-width: 600px;
             width: 100%;
@@ -313,6 +361,14 @@
                 <img src="../images/logo-blanc.png" alt="">
             </div>
 
+            <div class="download-container">
+                <a href="../documents/avis_audition_etpuisdanser.pdf" class="download-btn" download>Télécharger l'avis d'audition</a>
+            </div>
+
+            <div class="logo-connector">
+                <img src="../images/logo-blanc.png" alt="">
+            </div>
+
             <div class="content-container">
                 <h3>Note d'intention artistique</h3>
                 <p>La démarche artistique de Natacha Balet s'inscrit dans la filiation de la danse-théâtre, notamment celle de Pina Bausch, dont elle a suivi l'enseignement. Sa recherche chorégraphique repose sur une écoute fine du corps, du geste habité, et de l'émotion comme moteur du mouvement.</p>
@@ -365,6 +421,7 @@
 
         const containers = document.querySelectorAll('.content-container');
         const darkBoxes = document.querySelectorAll('.dark-box');
+        const downloadBtn = document.querySelector('.download-btn');
 
         containers.forEach(container => {
             observer.observe(container);
@@ -373,6 +430,10 @@
         darkBoxes.forEach(box => {
             observer.observe(box);
         });
+
+        if (downloadBtn) {
+            observer.observe(downloadBtn);
+        }
     </script>
     <script src="../js/main.js"></script>
 </body>
