@@ -24,7 +24,10 @@
       "Bash(agenda.html)",
       "Bash(open http://localhost:8000/index.html)",
       "Bash(ls:*)",
-      "Bash(for:*)"
+      "Bash(for:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(git add:*)"
     ]
   }
 }
